@@ -1,8 +1,11 @@
+const Messages = require('./messages_pb');
+
 class Player {
 
-    constructor(socket) {
+    constructor(socket, lobby) {
         this.socket = socket;
-        this.is_alive = false;
+        this.lobby = lobby;
+        this.is_alive = false;        
         this.is_connected = false;
         this._set_up_socket_listeners();
         this.pong_interval = setInterval(this._ping_interval_function.bind(this), 10000);
@@ -14,7 +17,19 @@ class Player {
     }
 
     _on_message(data) {
-        
+        let packet = Messages.Packet.deserializeBinary(data);
+        switch(packet.getType()) {
+            case Messages.Type.REQUEST_SLOT:
+                console.log(`${packet.getPlayerInfo().getName()} is requesting a slot`);
+                this._on_slot_request();
+                break;  
+            case Messages.Type.PLAYER_LOCATION:
+                this._on_location();
+                break;
+            case Messages.Type.PLAYER_ACTION:
+                this._on_player_action();
+                break;         
+        }
     }
 
     _on_pong() {
@@ -29,6 +44,18 @@ class Player {
         }
         this.is_alive = false;
         this.ping(() => {});
+    }
+
+    _on_slot_request() {
+
+    }
+
+    _on_location() {
+
+    }
+
+    _on_player_action() {
+        
     }
 }
 

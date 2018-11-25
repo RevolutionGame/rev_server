@@ -5,6 +5,9 @@
   "author": "Cody Finn",
   "license": "GLP-3.0",
   "private": true,
+  "scripts": {
+    "start": "node app"
+  },
   "dependencies": {
     "express": "^4.16.4",
     "google-protobuf": "^3.6.1",

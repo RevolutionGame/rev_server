@@ -10,7 +10,7 @@ class Lobby {
 
     onConnection(ws) {
         if(this.players.length < 10) {
-            let player = new Player(ws);
+            let player = new Player(ws, lobby);
             let player_id = this.players.push(player);
             player.id = player_id;
         }
