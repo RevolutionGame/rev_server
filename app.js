@@ -5,7 +5,7 @@ const Lobby = require('./src/lobby');
 
 app.get('/lobby', (req, res) => {
 		res.append('Access-Control-Allow-Origin', '*');
-		res.send(`ws://infinite-woodland-97233.herokuapp.com${lobby.options.path}`);
+		res.send(`ws://infinite-woodland-97233.herokuapp.com${lobby.server.options.path}`);
 });
 
 const server = app.listen(port, () => console.log(`Revolution Server up and listening on port ${port}`));
