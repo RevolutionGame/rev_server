@@ -1,0 +1,13 @@
+{
+  "name": "rev_server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "Cody Finn",
+  "license": "GLP-3.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.4",
+    "google-protobuf": "^3.6.1",
+    "ws": "^6.1.2"
+  }
+}
