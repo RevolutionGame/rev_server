@@ -17,7 +17,7 @@ class Lobby {
             player.id = player_id;
         }
         else {
-            ws.terminate();
+            ws.destroy();
         }
     }
 }
