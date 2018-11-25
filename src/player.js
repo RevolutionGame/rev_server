@@ -38,7 +38,7 @@ class Player {
 
     _ping_interval_function() {
         if(this.is_alive === false) {
-            console.log(`${name} has lost connection`);
+            console.log(`${this.name} has lost connection`);
             clearInterval(this.pong_interval);
             return socket.terminate();
         }
