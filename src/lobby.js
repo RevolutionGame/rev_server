@@ -9,6 +9,7 @@ class Lobby {
     }
 
     onConnection(ws) {
+        console.log("player requesting a connection");
         if(this.players.length < 10) {
             let player = new Player(ws, lobby);
             let player_id = this.players.push(player);
