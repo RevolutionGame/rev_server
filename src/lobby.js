@@ -4,7 +4,7 @@ const Player = require('./player');
 class Lobby {
 
     constructor(server, path) {
-        this.server = new WebSocket.Server({server: server, path: path});
+        this.server = new WebSocket.Server({server});
         this.players = new Array();
     }
 
