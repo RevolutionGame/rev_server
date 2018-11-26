@@ -26,11 +26,13 @@ class Player {
                 this._on_slot_request();
                 break;  
             case Messages.Type.PLAYER_LOCATION:
-                this._on_location();
+                this._on_location(packet);
                 break;
             case Messages.Type.PLAYER_ACTION:
-                this._on_player_action();
-                break;         
+                this._on_player_action(packet);
+                break;   
+            case Messages.Type.PLAYER_READY:
+                this._on_player_ready();
         }
     }
 
@@ -64,12 +66,26 @@ class Player {
         console.log('socket is open');
     }
 
-    _on_location() {
+    _on_location(packet) {
 
     }
 
-    _on_player_action() {
+    _on_player_action(packet) {
         
+    }
+
+    _on_player_ready() {
+
+    }
+
+    _broadcast(packet) {
+        this.lobby.players.forEach(player => {
+            player.send(packet);
+        });      
+    }
+
+    send(packet) {
+        this.socket.send(packet);
     }
 }
 
