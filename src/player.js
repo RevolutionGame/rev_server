@@ -5,15 +5,15 @@ class Player {
     constructor(socket, lobby) {
         this.socket = socket;
         this.lobby = lobby;
-        this.is_alive = false;   
+        this.is_alive = true;   
         this.is_connected = false;
         this._set_up_socket_listeners();
-        this.pong_interval = setInterval(this._ping_interval_function.bind(this), 10000);
+        this.pong_interval = setInterval(this._ping_interval_function.bind(this), 1000);
     }
 
     _set_up_socket_listeners() {
         this.socket.on('message', this._on_message.bind(this));
-        this.socket.on('pong', this._on_pong.bind(this));   
+        this.socket.on('pong', this._on_pong.bind(this));
         this.socket.on('open', this._on_open.bind(this));
         this.socket.on('error', this._on_error.bind(this));
     }
@@ -45,7 +45,7 @@ class Player {
             return this.socket.terminate();
         }
         this.is_alive = false;
-        this.ping(() => {});
+        this.socket.ping(() => {});
     }
 
     _on_close() {
