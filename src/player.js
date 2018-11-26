@@ -42,7 +42,7 @@ class Player {
         if(this.is_alive === false) {
             console.log(`${this.name} has lost connection`);
             clearInterval(this.pong_interval);
-            return this.socket.destroy();
+            return this.socket.terminate();
         }
         this.is_alive = false;
         this.ping(() => {});
