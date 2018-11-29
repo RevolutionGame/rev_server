@@ -20,18 +20,18 @@ class Player {
 
     _on_message(data) {
         let packet = Messages.Packet.deserializeBinary(data);
-        switch(packet.getType()) {
-            case Messages.Type.REQUEST_SLOT:
+        switch(packet.getBodyType()) {
+            case Messages.BodyType.REQUEST_SLOT:
                 console.log(`${packet.getPlayerInfo().getName()} is requesting a slot`);
                 this._on_slot_request();
                 break;
-            case Messages.Type.PLAYER_LOCATION:
+            case Messages.BodyType.PLAYER_LOCATION:
                 this._on_location(packet);
                 break;
-            case Messages.Type.PLAYER_ACTION:
+            case Messages.BodyType.PLAYER_ACTION:
                 this._on_player_action(packet);
                 break;   
-            case Messages.Type.PLAYER_READY:
+            case Messages.BodyType.PLAYER_READY:
                 this._on_player_ready();
         }
     }
@@ -71,7 +71,24 @@ class Player {
     }
 
     _on_player_action(packet) {
-        
+        let action = packet.getPlayerAction();
+        switch(action.getActionType()) {
+            case Messages.ActionType.FIRE_GUN:
+                this._broadcast(packet);
+                break;
+            case Messages.ActionType.DESPAWN_SHIP:
+                this._broadcast(packet);
+                break;
+            case Messages.ActionType.SPAWN_SHIP:
+                this._broadcast(packet);
+                break;   
+            case Messages.ActionType.HIT_ASTEROID:
+                this.asteroidHit(action);
+                break;   
+            case Messages.ActionType.HIT_PLAYER:
+                this.playerHit(action);
+        }
+        action.getActionType
     }
 
     _on_player_ready() {
@@ -86,6 +103,14 @@ class Player {
 
     send(packet) {
         this.socket.send(packet);
+    }
+
+    asteroidHit(action){
+        this.lobby.damageAsteroid(action);
+    }
+
+    playerHit(action, socket){
+        //this.lobby.damagePlayer();//TODO write this in lobby
     }
 }
 
