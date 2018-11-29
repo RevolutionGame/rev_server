@@ -24,7 +24,7 @@ class Player {
             case Messages.Type.REQUEST_SLOT:
                 console.log(`${packet.getPlayerInfo().getName()} is requesting a slot`);
                 this._on_slot_request();
-                break;  
+                break;
             case Messages.Type.PLAYER_LOCATION:
                 this._on_location(packet);
                 break;
@@ -67,7 +67,7 @@ class Player {
     }
 
     _on_location(packet) {
-
+        this._broadcast(packet);
     }
 
     _on_player_action(packet) {
@@ -75,7 +75,7 @@ class Player {
     }
 
     _on_player_ready() {
-
+        this.lobby.playerReady();
     }
 
     _broadcast(packet) {
