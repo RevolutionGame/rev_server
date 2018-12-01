@@ -100,7 +100,7 @@ class Lobby {
         while(!found && k < this.asteroids.length){
             asteroid = asteroids[k];
             if(asteroid.getObjectId === asteroidId){
-                asteroid.setHealth(asteroid.getHealth() - 5);
+                asteroid.setHealth(asteroid.getHealth() - 20);
             }
         }
     }

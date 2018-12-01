@@ -20,6 +20,7 @@ class Player {
 
     _on_message(data) {
         let packet = Messages.Packet.deserializeBinary(data);
+        console.log("packet received: " + packet);
         switch(packet.getBodyType()) {
             case Messages.BodyType.REQUEST_SLOT:
                 console.log(`${packet.getPlayerInfo().getName()} is requesting a slot`);
