@@ -69,20 +69,20 @@ class Player {
     }
 
     _on_location(packet) {
-        this._broadcast(packet);
+        this._broadcast(packet.serializeBinary());
     }
 
     _on_player_action(packet) {
         let action = packet.getPlayerAction();
         switch(action.getActionType()) {
             case Messages.ActionType.FIRE_GUN:
-                this._broadcast(packet);
+                this._broadcast(packet.serializeBinary());
                 break;
             case Messages.ActionType.DESPAWN_SHIP:
-                this._broadcast(packet);
+                this._broadcast(packet.serializeBinary());
                 break;
             case Messages.ActionType.SPAWN_SHIP:
-                this._broadcast(packet);
+                this._broadcast(packet.serializeBinary());
                 break;   
             case Messages.ActionType.HIT_ASTEROID:
                 this.asteroidHit(action);
