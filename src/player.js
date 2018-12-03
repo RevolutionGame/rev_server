@@ -12,6 +12,7 @@ class Player {
     }
 
     _set_up_socket_listeners() {
+        console.log("sets up listeners");
         this.socket.on('message', this._on_message.bind(this));
         this.socket.on('pong', this._on_pong.bind(this));
         this.socket.on('open', this._on_open.bind(this));

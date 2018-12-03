@@ -5,7 +5,7 @@ const Messages = require('./messages_pb');
 class Lobby {
 
     constructor(server, path) {
-        this.server = new WebSocket.Server({server: server, path: path});
+        this.server = new WebSocket.Server({server: server});
         this.server.on('connection', this.onConnection.bind(this));
         this.players = new Array();
 
