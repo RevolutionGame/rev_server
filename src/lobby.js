@@ -20,14 +20,27 @@ class Lobby {
     onConnection(ws, req) {
         console.log("player requesting a connection");
         console.log(`player IP ${req.connection.remoteAddress}`);
+        let player = new Player(ws, this);
+    }
+
+    onSlotRequest(player, packet){
         if(this.players.length < this.maxPlayers) {
-            let player = new Player(ws, this);
             let player_id = this.players.push(player);
             player.id = player_id;
+
+            packet.getPlayerInfo().setId(player_id);
+            this.playerJoin(packet.getPlayerInfo());
         }
         else {
-            ws.terminate();
+            player.socket.terminate();
         }
+    }
+
+    playerJoin(playerInfo){
+        let packet = new Messages.Packet();
+        packet.setBodyType(Messages.BodyType.PLAYER_JOIN);
+        packet.setPlayerInfo(playerInfo);
+        this.broadcast(packet.serializeBinary);
     }
 
     playerReady(){

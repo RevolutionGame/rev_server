@@ -26,7 +26,7 @@ class Player {
         switch(packet.getBodyType()) {
             case Messages.BodyType.REQUEST_SLOT:
                 console.log(`${packet.getPlayerInfo().getName()} is requesting a slot`);
-                this._on_slot_request();
+                this._on_slot_request(packet);
                 break;
             case Messages.BodyType.PLAYER_LOCATION:
                 this._on_location(packet);
@@ -62,8 +62,8 @@ class Player {
         console.log(`error ${err.message}`);
     }
 
-    _on_slot_request() {
-
+    _on_slot_request(packet) {
+        this.lobby.onSlotRequest(this, packet);
     }
 
     _on_open() {
