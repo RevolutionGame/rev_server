@@ -36,7 +36,7 @@ class Lobby {
             let packet = new Messages.Packet();
             packet.setBodyType(Messages.BodyType.GAME_START);
             console.log(packet.getBodyType());
-            this.broadcast(packet);
+            this.broadcast(packet.serializeBinary());
             this.beginGame();
         }
     }
@@ -69,7 +69,7 @@ class Lobby {
         sendingPacket.setBodyType(Messages.BodyType.WorldInfo);
         sendingPacket.setWorldInfo(sendingData);
 
-        this.broadcast(sendingPacket);
+        this.broadcast(sendingPacket.serializeBinary());
     }
 
     generateAsteroids(){
@@ -107,6 +107,15 @@ class Lobby {
 
     initializeGame(){
         this.asteroids = new Array();
+    }
+
+    removePlayer(player){
+        for( var i = 0; i < this.players.length; i++){ 
+            if ( this.players[i] === player) {
+              this.players.splice(i, 1);
+              console.log("spliced to remove player");
+            }
+         }
     }
 }
 

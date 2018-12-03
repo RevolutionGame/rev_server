@@ -17,6 +17,7 @@ class Player {
         this.socket.on('pong', this._on_pong.bind(this));
         this.socket.on('open', this._on_open.bind(this));
         this.socket.on('error', this._on_error.bind(this));
+        this.socket.on('close', this._on_close.bind(this));
     }
 
     _on_message(data) {
@@ -54,6 +55,7 @@ class Player {
 
     _on_close() {
         console.log('closing socket');
+        this.lobby.removePlayer(this);
     }
 
     _on_error(err) {
